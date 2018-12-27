@@ -1,0 +1,47 @@
+micronaut:
+    application:
+        name: eureka-example
+        instance:
+            id: ${random.shortuuid}
+    config-client:
+        enabled: false
+    metrics:
+        enabled: true
+    server:
+        port: 8110
+
+endpoints:
+    beans:
+        enabled: true
+        sensitive: false
+        id: beans
+    info:
+        enabled: true
+        sensitive: false
+        id: info
+    health:
+        enabled: true
+        sensitive: false
+        details-visible: ANONYMOUS
+        id: health
+        discovery-client:
+            enabled: false
+    routes:
+        enabled: true
+        sensitive: false
+        id: routes
+
+eureka:
+    client:
+        defaultZone: "http://eureka-server:8761"   # Eureka server location in Docker
+        registration:
+            enabled: true
+            fail-fast: false
+            vip-address: ${micronaut.application.name}
+            health-path: /health
+            retry-count: 10 # How many times to retry
+            retry-delay: 5s # How long to wait between retries
+            instance-id: ${micronaut.application.name}:${micronaut.application.instance.id}
+            prefer-ip-address: true
+            leaseInfo:
+                durationInSecs: 60

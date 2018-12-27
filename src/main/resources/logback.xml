@@ -1,0 +1,22 @@
+<configuration scan="true">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"application_name":"eureka-example"}</customFields>
+            <includeMdc>true</includeMdc>
+        </encoder>
+    </appender>
+
+    <!-- Micrometer is the metrics used at the /meter endpoint. At
+        at debug level it pumps out tons of log messages  -->
+    <logger name="io.micrometer" level="INFO" />
+
+    <logger name="io.micronaut.health.HeartbeatTask" level="TRACE"/>
+    <logger name="io.micronaut.http.client.DefaultHttpClient" level="TRACE"/>
+    <logger name="io.micronaut.discovery.registration.AutoRegistration" level="TRACE"/>
+    <logger name="io.micronaut.management.health.monitor" level="TRACE"/>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
