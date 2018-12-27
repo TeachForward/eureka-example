@@ -15,6 +15,7 @@ plugins {
 apply plugin:"application"
 apply plugin:"groovy"
 apply plugin:"java"
+apply plugin: "com.gorylenko.gradle-git-properties"
 
 
 version "0.1"
@@ -120,6 +121,7 @@ task printVersion {
         println "$jar.version"
     }
 }
+
 
 gitProperties {
     dateFormat = "yyyy-MM-dd'T'HH:mmZ"
