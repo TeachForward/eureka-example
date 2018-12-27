@@ -1,7 +1,9 @@
+import java.text.SimpleDateFormat
 
 buildscript {
     dependencies {
         classpath('se.transmode.gradle:gradle-docker:1.2')
+        classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
     }
 }
 
@@ -110,5 +112,31 @@ task buildDocker(type: Docker, dependsOn: build) {
             from file("$buildDir/libs")
             into stageDir
         }
+    }
+}
+
+task printVersion {
+    doFirst {
+        println "$jar.version"
+    }
+}
+
+gitProperties {
+    dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+    dateFormatTimeZone = "UTC"
+}
+
+def buildTime() {
+    final dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ")
+    dateFormat.timeZone = TimeZone.getTimeZone('UTC')
+    dateFormat.format(new Date())
+}
+
+class Version {
+    int major, minor
+    long revision
+
+    String toString() {
+        "$major.$minor.$revision"
     }
 }
