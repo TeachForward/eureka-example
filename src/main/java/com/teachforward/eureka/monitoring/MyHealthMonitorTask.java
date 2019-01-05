@@ -22,11 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Singleton
-@Replaces(HealthMonitorTask.class)
-@Requires(beans = EmbeddedServer.class)
-@Requires(property = ApplicationConfiguration.APPLICATION_NAME)
-@Requires(property = "micronaut.health.monitor.enabled", value = "true", defaultValue = "true")
+//@Singleton
+//@Replaces(HealthMonitorTask.class)
+//@Requires(beans = EmbeddedServer.class)
+//@Requires(property = ApplicationConfiguration.APPLICATION_NAME)
+//@Requires(property = "micronaut.health.monitor.enabled", value = "true", defaultValue = "true")
 public class MyHealthMonitorTask {
 
 
